@@ -24,20 +24,20 @@
             <table>
                 <tr>
                     <th>Type</th>
-                    <td>Cheese</td>
+                    <td><%= type %></td>
                 </tr>
                 <tr>
                     <th>Size</th>
-                    <td>Medium</td>
+                    <td><%= item %></td>
                 </tr>
                 <tr>
                     <th>Quantity</th>
-                    <td>2</td>
+                    <td><%= quantity %></td>
                 </tr>
                 <tr>
                     <th>Description</th>
                     <td>
-                        A simple yet delicious cheese pizza.
+                        <%= description %>
                     </td>
                 </tr>
             </table>
@@ -47,7 +47,7 @@
             <a class="btn-large waves-effect waves-light orange left modal-trigger" href="#stuffEdit">
                 <i class="material-icons right">edit</i>Edit
             </a>
-            <a class="btn-large waves-effect waves-light red right">
+            <a class="btn-large waves-effect waves-light red right" href="/stuff/item/<%= id %>/delete">
                 <i class="material-icons right">delete</i>Delete
             </a>
         </div>
@@ -58,7 +58,7 @@
             <div class="modal-content">
 
                 <h2>Edit pizza:</h2>
-                <form>
+                <form method="post" action="/stuff/item/<%= id%>">
                     <div class="row">
                         <div class="input-field col s6">
                             <label for="name">Type:</label>

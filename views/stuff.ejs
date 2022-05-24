@@ -48,50 +48,38 @@
 
                 </thead>
                 <tbody>
-
+                    <% for (let i = 0; i < inventory.length; i++) { %>
                     <tr>
-                        <td>Cheese</td>
-                        <td>Medium</td>
-                        <td>2</td>
+                        <td><%= inventory[i].type %></td>
+                        <td><%= inventory[i].item %></td>
+                        <td><%= inventory[i].quantity %></td>
                         <td>
-                            <a class="btn-small waves-effect waves-light" href="/stuff/item"><i
+                            <a class="btn-small waves-effect waves-light" href="/stuff/item/<%= inventory[i].id %>" ><i
                                     class="material-icons right">edit</i>Info/Edit</a>
-                            <a class="btn-small waves-effect waves-light red"><i
+                            <a class="btn-small waves-effect waves-light red" href="/stuff/item/<%= inventory[i].id %>/delete"><i
                                     class="material-icons right">delete</i>Delete</a>
                         </td>
                     </tr>
-
-                    <tr>
-                        <td>Pineapple</td>
-                        <td>Tiny</td>
-                        <td>78</td>
-                        <td>
-                            <a class="btn-small waves-effect waves-light" href="/stuff/item"><i
-                                    class="material-icons right">edit</i>Info/Edit</a>
-                            <a class="btn-small waves-effect waves-light red"><i
-                                    class="material-icons right">delete</i>Delete</a>
-                        </td>
-                    </tr>
-
+                    <% } %>
                 </tbody>
             </table>
         </div>
 
         <div class="section" id="stuffAdd">
             <h2>Add a pizza:</h2>
-            <form>
+            <form method="post" action="/stuff">
                 <div class="row">
                     <div class="input-field col s6">
-                        <label for="name">Type:</label>
-                        <input type="text" name="type" class="validate" data-length="32" required>
+                        <label for="typeInput">Type:</label>
+                        <input type="text" name="type" id="typeInput" class="validate" data-length="32" required>
                     </div>
                     <div class="input-field col s3">
-                        <label for="quantity">Size:</label>
-                        <input type="text" name="size" class="validate" data-length="32" required>
+                        <label for="sizeInput">Size:</label>
+                        <input type="text" name="size" id="sizeInput" class="validate" data-length="32" required>
                     </div>
                     <div class="input-field col s3">
-                        <label for="quantity">Quantity:</label>
-                        <input type="number" name="quantity" class="validate" required>
+                        <label for="quantityInput">Quantity:</label>
+                        <input type="number" name="quantity" id="quantityInput" class="validate" required>
                     </div>
                 </div>
                 <button class="btn waves-effect waves-light" type="submit"><i
