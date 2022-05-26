@@ -3,7 +3,7 @@ const express = require( "express" );
 const logger = require("morgan");
 const app = express();
 const port = 8080;
-const db = require('./db/db_connection');
+const db = require('./db/db_pool');
 app.set("view engine", "ejs")
 app.set("views", __dirname+"/views");
 // start the server
