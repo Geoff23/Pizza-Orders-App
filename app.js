@@ -1,9 +1,13 @@
 //set up the server
+
 const express = require( "express" );
 const logger = require("morgan");
 const app = express();
-const port = 8080;
+const dotenv = require('dotenv');
+dotenv.config();
+const port = process.env.PORT;
 const db = require('./db/db_pool');
+
 app.set("view engine", "ejs")
 app.set("views", __dirname+"/views");
 // start the server
