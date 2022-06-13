@@ -3,10 +3,10 @@
 const express = require( "express" );
 const logger = require("morgan");
 const app = express();
+const db = require('./db/db_pool');
 const dotenv = require('dotenv');
 dotenv.config();
 const port = process.env.PORT;
-const db = require('./db/db_pool');
 
 app.set("view engine", "ejs")
 app.set("views", __dirname+"/views");
@@ -20,6 +20,26 @@ app.use(logger("dev"));
 
 app.use(express.static(__dirname+'/public'))
 app.use( express.urlencoded({ extended: false }) );
+
+const { auth } = require('express-openid-connect');
+
+const config = {
+  authRequired: false,
+  auth0Logout: true,
+  secret: 'a long, randomly-generated string stored in env',
+  baseURL: 'http://localhost',
+  clientID: 'bIvhSdJVrPAWH1Oz7j8lCSzFY6Y0fNI4',
+  issuerBaseURL: 'https://dev-sogtvett.us.auth0.com'
+};
+
+// auth router attaches /login, /logout, and /callback routes to the baseURL
+app.use(auth(config));
+
+// req.isAuthenticated is provided from the auth router
+app.get('/testLogin', (req, res) => {
+  res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out');
+});
+
 // define a route for the default home page
 app.get( "/", ( req, res ) => {
     res.render('index');
